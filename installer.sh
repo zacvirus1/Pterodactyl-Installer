@@ -936,6 +936,7 @@ echo "[3] Instalar o PHPMyAdmin."
 echo "[4] Remover o Wings."
 echo "[5] Remover o Painel."
 echo "[6] Trocar o Domínio do Pterodactyl."
+echo "[7] Instalar Tema BR."
 echo "Digite 1-6"
 read -r option
 
@@ -957,6 +958,9 @@ read -r option
                 ;;
             6 ) option=6
                 switchdomains
+                ;;
+            7 ) option=6
+                tema_br
                 ;;
             * ) echo ""
                 echo "Please enter a valid option from 1-6"
