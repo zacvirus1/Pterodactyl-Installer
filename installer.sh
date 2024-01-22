@@ -937,7 +937,7 @@ echo "[4] Remover o Wings."
 echo "[5] Remover o Painel."
 echo "[6] Trocar o Domínio do Pterodactyl."
 echo "[7] Instalar Tema BR."
-echo "Digite 1-6"
+echo "Digite 1-7"
 read -r option
 
         case $option in
@@ -959,7 +959,7 @@ read -r option
             6 ) option=6
                 switchdomains
                 ;;
-            7 ) option=6
+            7 ) option=7
                 tema_br
                 ;;
             * ) echo ""
