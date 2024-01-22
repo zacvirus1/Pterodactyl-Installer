@@ -905,6 +905,7 @@ tema_br() {
     bash <(curl -s https://raw.githubusercontent.com/zacvirus1/Pterodactyl-Installer/main/tema-br.sh)
 }
 
+
 ### Options ###
 options(){
     if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
