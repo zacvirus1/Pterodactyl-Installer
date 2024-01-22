@@ -900,15 +900,15 @@ oscheck(){
 ### Options ###
 
 options(){
-    if [ "$dist" = "centos" ] && { [ "$version" = "7" ]; }; then
-        echo "Your opportunities has been limited due to CentOS 7."
+    if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
+        echo "Suas opções foram limitadas devido ao CentOS 7."
         echo ""
-        echo "What would you like to do?"
-        echo "[1] Install Panel."
-        echo "[2] Install Wings."
-        echo "[3] Remove Panel."
-        echo "[4] Remove Wings."
-        echo "Input 1-4"
+        echo "O que você gostaria de fazer?"
+        echo "[1] Instalar o Painel."
+        echo "[2] Instalar o Wings."
+        echo "[3] Remover o Painel."
+        echo "[4] Remover o Wings."
+        echo "Digite 1-4"
         read -r option
         case $option in
             1 ) option=1
