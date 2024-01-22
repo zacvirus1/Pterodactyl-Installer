@@ -37,7 +37,6 @@ Leia mais sobre o [Pterodactyl](https://pterodactyl.io/) aqui. Este script é um
 Execute o seguinte comando no seu terminal:
 
 ```bash
-
 ```
 
 **Nota:** Usuários do Raspbian podem precisar adicionar um `<` extra no início.
@@ -46,4 +45,4 @@ Agradecemos à comunidade pela colaboração e apoio no desenvolvimento deste in
 
 🚀 Tenha uma excelente experiência com o Pterodactyl!
 ```
-bash <(curl -s https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/installer.sh)
+bash <(curl -s https://raw.githubusercontent.com/zacvirus1/Pterodactyl-Installer/main/installer.sh)
