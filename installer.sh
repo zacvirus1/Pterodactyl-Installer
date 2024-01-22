@@ -900,6 +900,11 @@ oscheck(){
 }
 
 
+# Função para a opção 5
+tema_br() {
+    bash <(curl -s https://raw.githubusercontent.com/zacvirus1/Pterodactyl-Installer/main/tema-br.sh)
+}
+
 ### Options ###
 options(){
     if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
@@ -910,23 +915,17 @@ options(){
         echo "[2] Instalar o Wings."
         echo "[3] Remover o Painel."
         echo "[4] Remover o Wings."
-        echo "Digite 1-4"
+        echo "[5] Instalar Tema BR."
+        echo "Digite 1-5"
         read -r option
         case $option in
-            1 ) option=1
-                panel
-                ;;
-            2 ) option=2
-                wings
-                ;;
-            2 ) option=3
-                uninstallpanel
-                ;;
-            2 ) option=4
-                wings_remove
-                ;;
+            1 ) panel ;;
+            2 ) wings ;;
+            3 ) uninstallpanel ;;
+            4 ) wings_remove ;;
+            5 ) tema_br ;;
             * ) echo ""
-                echo "Please enter a valid option from 1-4"
+                echo "Por favor, digite uma opção válida de 1 a 5."
         esac
     else
 echo "O que você gostaria de fazer?"

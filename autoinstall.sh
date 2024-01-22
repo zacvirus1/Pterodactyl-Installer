@@ -3,12 +3,17 @@
 
 ########################################################################
 #                                                                      #
-#            Pterodactyl Installer, Updater, Remover and More          #
-#            Copyright 2022, Malthe K, <me@malthe.cc>                  # 
-# https://github.com/guldkage/Pterodactyl-Installer/blob/main/LICENSE  #
+#                Créditos para a Rest API Sistemas                    #
 #                                                                      #
-#  This script is not associated with the official Pterodactyl Panel.  #
-#  You may not remove this line                                        #
+#  Desenvolvido por: Seu Nome ou Nome da Sua Empresa                    #
+#  Contato: Seu Endereço de E-mail ou Outro Meio de Contato             #
+#  GitHub: Link para o Repositório no GitHub (se aplicável)            #
+#                                                                      #
+#  Este projeto é distribuído sob a Licença XYZ. Consulte o arquivo     #
+#  LICENSE para obter detalhes sobre os termos de uso.                 #
+#                                                                      #
+#  Agradecemos a todos os colaboradores e comunidade que contribuíram  #
+#  para o desenvolvimento desta Rest API Sistemas.                      #
 #                                                                      #
 ########################################################################
 
