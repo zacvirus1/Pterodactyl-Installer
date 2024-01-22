@@ -346,29 +346,30 @@ panel_summary(){
     USERPASSWORD=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1`
     DBPASSWORDHOST=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1`
     echo ""
-    echo "[!] Summary:"
-    echo "    Panel URL: $FQDN"
-    echo "    Webserver: $WEBSERVER"
+    echo "[!] Resumo:"
+    echo "    URL do Painel: $FQDN"
+    echo "    Servidor Web: $WEBSERVER"
     echo "    SSL: $SSLSTATUS"
-    echo "    Username: $USERNAME"
-    echo "    First name: $FIRSTNAME"
-    echo "    Last name: $LASTNAME"
-    echo "    Password: $USERPASSWORD"
+    echo "    Nome de usuário: $USERNAME"
+    echo "    Nome: $FIRSTNAME"
+    echo "    Sobrenome: $LASTNAME"
+    echo "    Senha: $USERPASSWORD"
     echo ""
-    echo "    These credentials will be saved in a file called" 
-    echo "    panel_credentials.txt in your current directory"
+    echo "    Essas credenciais serão salvas em um arquivo chamado" 
+    echo "    panel_credentials.txt no seu diretório atual"
     echo "" 
-    echo "    Do you want to start the installation? (Y/N)" 
+    echo "    Deseja iniciar a instalação? (S/N)" 
     read -r PANEL_INSTALLATION
 
-    if [[ "$PANEL_INSTALLATION" =~ [Yy] ]]; then
+    if [[ "$PANEL_INSTALLATION" =~ [Ss] ]]; then
         panel_install
     fi
     if [[ "$PANEL_INSTALLATION" =~ [Nn] ]]; then
-        echo "[!] Installation has been aborted."
+        echo "[!] A instalação foi abortada."
         exit 1
     fi
 }
+
 
 panel_fqdn(){
     send_summary
