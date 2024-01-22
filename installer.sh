@@ -927,15 +927,16 @@ options(){
                 echo "Please enter a valid option from 1-4"
         esac
     else
-        echo "What would you like to do?"
-        echo "[1] Install Panel."
-        echo "[2] Install Wings."
-        echo "[3] Install PHPMyAdmin."
-        echo "[4] Remove Wings"
-        echo "[5] Remove Panel"
-        echo "[6] Switch Pterodactyl Domain"
-        echo "Input 1-6"
-        read -r option
+echo "O que você gostaria de fazer?"
+echo "[1] Instalar o Painel."
+echo "[2] Instalar o Wings."
+echo "[3] Instalar o PHPMyAdmin."
+echo "[4] Remover o Wings."
+echo "[5] Remover o Painel."
+echo "[6] Trocar o Domínio do Pterodactyl."
+echo "Digite 1-6"
+read -r option
+
         case $option in
             1 ) option=1
                 panel
