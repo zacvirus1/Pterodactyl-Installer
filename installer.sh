@@ -966,10 +966,10 @@ options(){
 
 clear
 echo ""
-echo "Pterodactyl Installer @ v2.0"
-echo "Copyright 2023, Malthe K, <me@malthe.cc>"
+echo "Instalador do Pterodactyl @ v2.0"
+echo "Direitos Autorais 2023, Malthe K, <me@malthe.cc>"
 echo "https://github.com/guldkage/Pterodactyl-Installer"
 echo ""
-echo "This script is not associated with the official Pterodactyl Panel."
+echo "Este script não está associado ao Painel Pterodactyl oficial."
 echo ""
 oscheck
