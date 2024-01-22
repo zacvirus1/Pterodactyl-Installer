@@ -967,7 +967,6 @@ clear
 echo ""
 echo "Pterodactyl Installer v4.0"
 echo "Desenvolvido por Rest API Sistemas"
-echo "Copyright 2023, Malthe K, <me@malthe.cc>"
 echo ""
 echo "Este script não possui afiliação com o Painel Pterodactyl oficial."
 echo ""
