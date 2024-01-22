@@ -36,7 +36,8 @@ Leia mais sobre o [Pterodactyl](https://pterodactyl.io/) aqui. Este script é um
 
 Execute o seguinte comando no seu terminal:
 
-```
+```bash
+
 ```
 
 **Nota:** Usuários do Raspbian podem precisar adicionar um `<` extra no início.
