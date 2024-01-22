@@ -4,21 +4,27 @@
 
 ########################################################################
 #                                                                      #
-#            Pterodactyl Installer, Updater, Remover and More          #
-#            Copyright 2023, Malthe K, <me@malthe.cc> hej              # 
-#  https://github.com/guldkage/Pterodactyl-Installer/blob/main/LICENSE #
+#                Créditos para a Rest API Sistemas                    #
 #                                                                      #
-#  This script is not associated with the official Pterodactyl Panel.  #
-#  You may not remove this line                                        #
+#  Desenvolvido por: Seu Nome ou Nome da Sua Empresa                    #
+#  Contato: Seu Endereço de E-mail ou Outro Meio de Contato             #
+#  GitHub: Link para o Repositório no GitHub (se aplicável)            #
+#                                                                      #
+#  Este projeto é distribuído sob a Licença XYZ. Consulte o arquivo     #
+#  LICENSE para obter detalhes sobre os termos de uso.                 #
+#                                                                      #
+#  Agradecemos a todos os colaboradores e comunidade que contribuíram  #
+#  para o desenvolvimento desta Rest API Sistemas.                      #
 #                                                                      #
 ########################################################################
 
-### VARIABLES ###
+
+### VARIAVEIS ###
 
 dist="$(. /etc/os-release && echo "$ID")"
 version="$(. /etc/os-release && echo "$VERSION_ID")"
 
-### OUTPUTS ###
+### VERIFICAÇÕES ###
 
 function trap_ctrlc ()
 {
@@ -36,48 +42,51 @@ warning(){
 
 if [[ $EUID -ne 0 ]]; then
     echo ""
-    echo "[!] Sorry, but you need to be root to run this script."
-    echo "Most of the time this can be done by typing sudo su in your terminal"
+    echo "[!] Desculpe, mas você precisa ser root para executar este script."
+    echo "Na maioria das vezes, isso pode ser feito digitando sudo su no seu terminal."
     exit 1
 fi
 
+
 if ! [ -x "$(command -v curl)" ]; then
     echo ""
-    echo "[!] cURL is required to run this script."
-    echo "To proceed, please install cURL on your machine."
+    echo "[!] cURL é necessário para executar este script."
+    echo "Para continuar, por favor, instale o cURL em sua máquina."
     echo ""
-    echo "Debian based systems: apt install curl"
+    echo "Sistemas baseados em Debian: apt install curl"
     echo "CentOS: yum install curl"
     exit 1
 fi
 
-### Pterodactyl Panel Installation ###
+
+### ### Instalação do Painel Pterodactyl ### ###
 
 send_summary() {
     clear
     echo ""
     
     if [ -d "/var/www/pterodactyl" ]; then
-        warning "[!] WARNING: Pterodactyl is already installed. This script will fail!"
+        warning "[!] AVISO: O Pterodactyl já está instalado. Este script falhará!"
     fi
 
     echo ""
-    echo "[!] Summary:"
-    echo "    Panel URL: $FQDN"
-    echo "    Webserver: $WEBSERVER"
+    echo "[!] Resumo:"
+    echo "    URL do Painel: $FQDN"
+    echo "    Servidor Web: $WEBSERVER"
     echo "    SSL: $SSLSTATUS"
-    echo "    Username: $USERNAME"
-    echo "    First name: $FIRSTNAME"
-    echo "    Last name: $LASTNAME"
-    echo "    Password: $USERPASSWORD"
+    echo "    Nome de Usuário: $USERNAME"
+    echo "    Primeiro Nome: $FIRSTNAME"
+    echo "    Último Nome: $LASTNAME"
+    echo "    Senha: $USERPASSWORD"
     echo ""
     
     if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
-        echo "    You are running CentOS 7. NGINX will be selected as the webserver."
+        echo "    Você está usando CentOS 7. O NGINX será selecionado como servidor web."
     fi
     
     echo ""
 }
+
 
 panel(){
     echo ""
