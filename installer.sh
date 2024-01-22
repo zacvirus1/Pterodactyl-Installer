@@ -845,23 +845,23 @@ switch(){
 
 switchemail(){
     echo ""
-    echo "[!] Change domains"
-    echo "    To install your new domain certificate to your Panel, your email address must be shared with Let's Encrypt."
-    echo "    They will send you an email when your certificate is about to expire. A certificate lasts 90 days at a time and you can renew your certificates for free and easily, even with this script."
+    echo "[!] Trocar domínios"
+    echo "    Para instalar o certificado do seu novo domínio no seu Painel, seu endereço de e-mail deve ser compartilhado com o Let's Encrypt."
+    echo "    Eles enviarão um e-mail quando seu certificado estiver prestes a expirar. Um certificado dura 90 dias e você pode renová-lo gratuitamente e facilmente, mesmo com este script."
     echo ""
-    echo "    When you created your certificate for your panel before, they also asked you for your email address. It's the exact same thing here, with your new domain."
-    echo "    Therefore, enter your email. If you do not feel like giving your email, then the script can not continue. Press CTRL + C to exit."
+    echo "    Quando você criou o certificado para o seu painel antes, eles também pediram seu endereço de e-mail. É exatamente a mesma coisa aqui, com seu novo domínio."
+    echo "    Portanto, insira seu e-mail. Se não quiser fornecer seu e-mail, o script não poderá continuar. Pressione CTRL + C para sair."
     echo ""
-    echo "      Please enter your email"
+    echo "      Por favor, insira seu e-mail"
 
     read -r EMAILSWITCHDOMAINS
     switch
 }
 
 switchssl(){
-    echo "[!] Select the one that describes your situation best"
-    warning "   [1] I want SSL on my Panel on my new domain"
-    warning "   [2] I don't want SSL on my Panel on my new domain"
+    echo "[!] Selecione a opção que melhor descreve a sua situação"
+    warning "   [1] Eu quero SSL no meu Painel no novo domínio"
+    warning "   [2] Eu não quero SSL no meu Painel no novo domínio"
     read -r option
     case $option in
         1 ) option=1
@@ -873,31 +873,50 @@ switchssl(){
             switch
             ;;
         * ) echo ""
-            echo "Please enter a valid option."
+            echo "Por favor, insira uma opção válida."
     esac
 }
 
+
 switchdomains(){
     echo ""
-    echo "[!] Change domains"
-    echo "    Please enter the domain (panel.mydomain.ltd) you want to switch to."
+    echo "[!] Trocar domínios"
+    echo "    Por favor, insira o domínio (painel.meudominio.com) para o qual deseja trocar."
     read -r DOMAINSWITCH
     switchssl
 }
 
+
 ### OS Check ###
 
 oscheck(){
-    echo "Checking your OS.."
+    echo "Verificando seu sistema operacional.."
     if { [ "$dist" = "ubuntu" ] && [ "$version" = "18.04" ] || [ "$version" = "20.04" ] || [ "$version" = "22.04" ]; } || { [ "$dist" = "centos" ] && [ "$version" = "7" ]; } || { [ "$dist" = "debian" ] && [ "$version" = "11" ] || [ "$version" = "12" ]; }; then
         options
     else
-        echo "Your OS, $dist $version, is not supported"
+        echo "Seu sistema operacional, $dist $version, não é suportado."
         exit 1
     fi
 }
 
+
 ### Options ###
+# Arte ASCII para "Rest API Sistemas"
+ascii_art="#  #####    ######    ####    ######              ##     #####     ####              ####     ####     ####    ######   ######   ##   ##    ##      #### #
+#  ##  ##   ##       ##  ##     ##               ####    ##  ##     ##              ##  ##     ##     ##  ##     ##     ##       ### ###   ####    ##  ## #
+#  ##  ##   ##       ##         ##              ##  ##   ##  ##     ##              ##         ##     ##         ##     ##       #######  ##  ##   ## #
+#  #####    ####      ####      ##              ######   #####      ##               ####      ##      ####      ##     ####     ## # ##  ######    #### #
+#  ####     ##           ##     ##              ##  ##   ##         ##                  ##     ##         ##     ##     ##       ##   ##  ##  ##       ## #
+#  ## ##    ##       ##  ##     ##              ##  ##   ##         ##              ##  ##     ##     ##  ##     ##     ##       ##   ##  ##  ##   ##  ## #
+#  ##  ##   ######    ####      ##              ##  ##   ##        ####              ####     ####     ####      ##     ######   ##   ##  ##  ##    #### #
+
+"
+
+# Exibir arte ASCII
+echo -e "$ascii_art"
+
+# Aguardar 3 segundos
+sleep 3
 
 options(){
     if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
