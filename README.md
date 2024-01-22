@@ -36,10 +36,6 @@ Leia mais sobre o [Pterodactyl](https://pterodactyl.io/) aqui. Este script é um
 
 Execute o seguinte comando no seu terminal:
 
-```bash
-bash <(curl -s https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/installer.sh)
-```
-
 **Nota:** Usuários do Raspbian podem precisar adicionar um `<` extra no início.
 
 Agradecemos à comunidade pela colaboração e apoio no desenvolvimento deste instalador!
