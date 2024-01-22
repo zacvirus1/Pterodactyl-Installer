@@ -89,37 +89,38 @@ send_summary() {
 
 panel(){
     echo ""
-    echo "[!] Before installation, we need some information."
+    echo "[!] Antes da instalação, precisamos de algumas informações."
     echo ""
     panel_webserver
 }
 
+
 finish(){
     clear
     cd
-    echo -e "Summary of the installation\n\nPanel URL: $FQDN\nWebserver: $WEBSERVER\nUsername: $USERNAME\nFirst name: $FIRSTNAME\nLast name: $LASTNAME\nPassword: $USERPASSWORD\nDatabase password: $DBPASSWORD\nPassword for Database Host: $DBPASSWORDHOST" >> panel_credentials.txt
+    echo -e "Resumo da instalação\n\nURL do Painel: $FQDN\nServidor Web: $WEBSERVER\nNome de usuário: $USERNAME\nNome: $FIRSTNAME\nSobrenome: $LASTNAME\nSenha: $USERPASSWORD\nSenha do banco de dados: $DBPASSWORD\nSenha para o Host do Banco de Dados: $DBPASSWORDHOST" >> panel_credentials.txt
 
-    echo "[!] Installation of Pterodactyl Panel done"
+    echo "[!] Instalação do Painel Pterodactyl concluída"
     echo ""
-    echo "    Summary of the installation" 
-    echo "    Panel URL: $FQDN"
-    echo "    Webserver: $WEBSERVER"
+    echo "    Resumo da instalação" 
+    echo "    URL do Painel: $FQDN"
+    echo "    Servidor Web: $WEBSERVER"
     echo "    SSL: $SSLSTATUS"
-    echo "    Username: $USERNAME"
-    echo "    First name: $FIRSTNAME"
-    echo "    Last name: $LASTNAME"
-    echo "    Password: $USERPASSWORD"
+    echo "    Nome de usuário: $USERNAME"
+    echo "    Nome: $FIRSTNAME"
+    echo "    Sobrenome: $LASTNAME"
+    echo "    Senha: $USERPASSWORD"
     echo "" 
-    echo "    Database password: $DBPASSWORD"
-    echo "    Password for Database Host: $DBPASSWORDHOST"
+    echo "    Senha do banco de dados: $DBPASSWORD"
+    echo "    Senha para o Host do Banco de Dados: $DBPASSWORDHOST"
     echo "" 
-    echo "    These credentials has been saved in a file called" 
-    echo "    panel_credentials.txt in your current directory"
+    echo "    Essas credenciais foram salvas em um arquivo chamado" 
+    echo "    panel_credentials.txt no seu diretório atual"
     echo ""
-    echo "    Would you like to install Wings too? (Y/N)"
+    echo "    Gostaria de instalar também o Wings? (S/N)"
     read -r WINGS_ON_PANEL
 
-    if [[ "$WINGS_ON_PANEL" =~ [Yy] ]]; then
+    if [[ "$WINGS_ON_PANEL" =~ [Ss] ]]; then
         wings
     fi
     if [[ "$WINGS_ON_PANEL" =~ [Nn] ]]; then
@@ -127,12 +128,13 @@ finish(){
     fi
 }
 
+
 panel_webserver(){
     send_summary
-    echo "[!] Select Webserver"
+    echo "[!] Selecionar Servidor Web"
     echo "    (1) NGINX"
     echo "    (2) Apache"
-    echo "    Input 1-2"
+    echo "    Digite 1-2"
     read -r option
     case $option in
         1 ) option=1
@@ -144,9 +146,10 @@ panel_webserver(){
             panel_fqdn
             ;;
         * ) echo ""
-            echo "Please enter a valid option from 1-2"
+            echo "Por favor, digite uma opção válida de 1 a 2"
     esac
 }
+
 
 panel_conf(){
     [ "$SSLSTATUS" == true ] && appurl="https://$FQDN"
@@ -369,16 +372,16 @@ panel_summary(){
 
 panel_fqdn(){
     send_summary
-    echo "[!] Please enter FQDN. You will access Panel with this."
-    echo "[!] Example: panel.yourdomain.dk."
+    echo "[!] Por favor, insira o FQDN. Você acessará o Painel com isso."
+    echo "[!] Exemplo: panel.seudomínio.com."
     read -r FQDN
-    [ -z "$FQDN" ] && echo "FQDN can't be empty."
+    [ -z "$FQDN" ] && echo "O FQDN não pode estar vazio."
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "Your FQDN does not resolve to the IP of this machine."
-        echo "Continuing anyway in 10 seconds.. CTRL+C to stop."
+        echo "Seu FQDN não resolve para o IP desta máquina."
+        echo "Continuando de qualquer maneira em 10 segundos... CTRL+C para parar."
         sleep 10s
         panel_ssl
     else
@@ -386,13 +389,14 @@ panel_fqdn(){
     fi
 }
 
+
 panel_ssl(){
     send_summary
-    echo "[!] Do you want to use SSL for your Panel? This is recommended. (Y/N)"
-    echo "[!] SSL is recommended for every panel."
+    echo "[!] Você deseja usar SSL para o seu Painel? Isso é recomendado. (S/N)"
+    echo "[!] O SSL é recomendado para todos os painéis."
     read -r SSL_CONFIRM
 
-    if [[ "$SSL_CONFIRM" =~ [Yy] ]]; then
+    if [[ "$SSL_CONFIRM" =~ [Ss] ]]; then
         SSLSTATUS=true
         panel_email
     fi
@@ -405,30 +409,33 @@ panel_ssl(){
 panel_email(){
     send_summary
     if  [ "$SSLSTATUS" =  "true" ]; then
-        echo "[!] Please enter your email. It will be shared with Lets Encrypt and being used to setup this Panel."
-        fi
+        echo "[!] Por favor, insira seu e-mail. Ele será compartilhado com o Lets Encrypt e usado para configurar este Painel."
+    fi
     if  [ "$SSLSTATUS" =  "false" ]; then
-        echo "[!] Please enter your email. It will used to setup this Panel."
-        fi
+        echo "[!] Por favor, insira seu e-mail. Ele será usado para configurar este Painel."
+    fi
     read -r EMAIL
     panel_username
 }
 
+
 panel_username(){
     send_summary
-    echo "[!] Please enter username for admin account. You can use your username to login to your Pterodactyl Account."
+    echo "[!] Por favor, insira o nome de usuário para a conta de administrador. Você pode usar o nome de usuário para fazer login na sua conta Pterodactyl."
     read -r USERNAME
     panel_firstname
 }
+
 panel_firstname(){
     send_summary
-    echo "[!] Please enter first name for admin account."
+    echo "[!] Por favor, insira o primeiro nome para a conta de administrador."
     read -r FIRSTNAME
     panel_lastname
 }
+
 panel_lastname(){
     send_summary
-    echo "[!] Please enter last name for admin account."
+    echo "[!] Por favor, insira o último nome para a conta de administrador."
     read -r LASTNAME
     panel_summary
 }
@@ -439,33 +446,35 @@ wings(){
     if [ "$dist" = "debian" ] || [ "$dist" = "ubuntu" ]; then
         apt install dnsutils certbot -y
         apt-get -y install curl tar unzip
-        fi
+    fi
     if [ "$dist" = "centos" ]; then
         sudo yum install bind-utils certbot -y
         yum install -y policycoreutils policycoreutils-python selinux-policy selinux-policy-targeted libselinux-utils setroubleshoot-server setools setools-console mcstrans -y
         yum install tar unzip zip
-        fi
+    fi
     clear
     echo ""
-    echo "[!] Before installation, we need some information."
+    echo "[!] Antes da instalação, precisamos de algumas informações."
     echo ""
     wings_fqdn
 }
 
+
 wings_fqdnask(){
-    echo "[!] Do you want to install a SSL certificate? (Y/N)"
-    echo "    If yes, you will be asked for an email."
-    echo "    The email will be shared with Lets Encrypt."
+    echo "[!] Você deseja instalar um certificado SSL? (S/N)"
+    echo "    Se sim, será solicitado um endereço de e-mail."
+    echo "    O e-mail será compartilhado com o Lets Encrypt."
     read -r WINGS_SSL
 
-    if [[ "WINGS_SSL" =~ [Yy] ]]; then
+    if [[ "$WINGS_SSL" =~ [Ss] ]]; then
         panel_fqdn
     fi
-    if [[ "$SSL_CONFIRM" =~ [Nn] ]]; then
+    if [[ "$WINGS_SSL" =~ [Nn] ]]; then
         WINGS_FQDN_STATUS=false
         wings_full
     fi
 }
+
 
 wings_full(){
     if  [ "$WINGS_FQDN_STATUS" =  "true" ]; then
@@ -505,13 +514,13 @@ wings_full(){
 }
 
 wings_fqdn(){
-    echo "[!] Please enter your FQDN if you want to install a SSL certificate. If not, press enter and leave this blank."
+    echo "[!] Por favor, insira o seu FQDN se desejar instalar um certificado SSL. Se não, pressione Enter e deixe em branco."
     read -r WINGS_FQDN
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${WINGS_FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "FQDN cancelled. Either FQDN is incorrect or you left this blank."
+        echo "FQDN cancelado. Ou o FQDN está incorreto ou você deixou em branco."
         WINGS_FQDN_STATUS=false
         wings_full
     else
@@ -520,33 +529,35 @@ wings_fqdn(){
     fi
 }
 
+
 ### PHPMyAdmin Installation ###
 
 phpmyadmin(){
     apt install dnsutils -y
     echo ""
-    echo "[!] Before installation, we need some information."
+    echo "[!] Antes da instalação, precisamos de algumas informações."
     echo ""
     phpmyadmin_fqdn
 }
 
 phpmyadmin_finish(){
     cd
-    echo -e "PHPMyAdmin Installation\n\nSummary of the installation\n\nPHPMyAdmin URL: $PHPMYADMIN_FQDN\nPreselected webserver: NGINX\nSSL: $PHPMYADMIN_SSLSTATUS\nUser: $PHPMYADMIN_USER_LOCAL\nEmail: $PHPMYADMIN_EMAIL" > phpmyadmin_credentials.txt
+    echo -e "Instalação do PHPMyAdmin\n\nResumo da instalação\n\nURL do PHPMyAdmin: $PHPMYADMIN_FQDN\nServidor Web pré-selecionado: NGINX\nSSL: $PHPMYADMIN_SSLSTATUS\nUsuário: $PHPMYADMIN_USER_LOCAL\nEmail: $PHPMYADMIN_EMAIL" > phpmyadmin_credentials.txt
     clear
-    echo "[!] Installation of PHPMyAdmin done"
+    echo "[!] Instalação do PHPMyAdmin concluída"
     echo ""
-    echo "    Summary of the installation" 
-    echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
-    echo "    Preselected webserver: NGINX"
+    echo "    Resumo da instalação" 
+    echo "    URL do PHPMyAdmin: $PHPMYADMIN_FQDN"
+    echo "    Servidor Web pré-selecionado: NGINX"
     echo "    SSL: $PHPMYADMIN_SSLSTATUS"
-    echo "    User: $PHPMYADMIN_USER_LOCAL"
+    echo "    Usuário: $PHPMYADMIN_USER_LOCAL"
     echo "    Email: $PHPMYADMIN_EMAIL"
     echo ""
-    echo "    These credentials will has been saved in a file called" 
-    echo "    phpmyadmin_credentials.txt in your current directory"
+    echo "    Essas credenciais foram salvas em um arquivo chamado" 
+    echo "    phpmyadmin_credentials.txt no seu diretório atual"
     echo ""
 }
+
 
 
 phpmyadminweb(){
@@ -578,21 +589,22 @@ phpmyadminweb(){
 
 phpmyadmin_fqdn(){
     send_phpmyadmin_summary
-    echo "[!] Please enter FQDN. You will access PHPMyAdmin with this."
+    echo "[!] Por favor, insira o FQDN. Você acessará o PHPMyAdmin com isso."
     read -r PHPMYADMIN_FQDN
-    [ -z "$PHPMYADMIN_FQDN" ] && echo "FQDN can't be empty."
+    [ -z "$PHPMYADMIN_FQDN" ] && echo "O FQDN não pode estar vazio."
     IP=$(dig +short myip.opendns.com @resolver2.opendns.com -4)
     DOMAIN=$(dig +short ${PHPMYADMIN_FQDN})
     if [ "${IP}" != "${DOMAIN}" ]; then
         echo ""
-        echo "Your FQDN does not resolve to the IP of this machine."
-        echo "Continuing anyway in 10 seconds.. CTRL+C to stop."
+        echo "Seu FQDN não resolve para o IP desta máquina."
+        echo "Continuando de qualquer maneira em 10 segundos... CTRL+C para parar."
         sleep 10s
         phpmyadmin_ssl
     else
         phpmyadmin_ssl
     fi
 }
+
 
 phpmyadmininstall(){
     apt update
@@ -638,60 +650,62 @@ phpmyadmininstall(){
 phpmyadmin_summary(){
     clear
     echo ""
-    echo "[!] Summary:"
-    echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
-    echo "    Preselected webserver: NGINX"
+    echo "[!] Resumo:"
+    echo "    URL do PHPMyAdmin: $PHPMYADMIN_FQDN"
+    echo "    Servidor Web pré-selecionado: NGINX"
     echo "    SSL: $PHPMYADMIN_SSLSTATUS"
-    echo "    User: $PHPMYADMIN_USER_LOCAL"
+    echo "    Usuário: $PHPMYADMIN_USER_LOCAL"
     echo "    Email: $PHPMYADMIN_EMAIL"
     echo ""
-    echo "    These credentials have been saved in a file called" 
-    echo "    phpmyadmin_credentials.txt in your current directory"
+    echo "    Essas credenciais foram salvas em um arquivo chamado" 
+    echo "    phpmyadmin_credentials.txt no seu diretório atual"
     echo "" 
-    echo "    Do you want to start the installation? (Y/N)" 
+    echo "    Deseja iniciar a instalação? (S/N)" 
     read -r PHPMYADMIN_INSTALLATION
 
-    if [[ "$PHPMYADMIN_INSTALLATION" =~ [Yy] ]]; then
+    if [[ "$PHPMYADMIN_INSTALLATION" =~ [Ss] ]]; then
         phpmyadmininstall
     fi
     if [[ "$PHPMYADMIN_INSTALLATION" =~ [Nn] ]]; then
-        echo "[!] Installation has been aborted."
+        echo "[!] A instalação foi abortada."
         exit 1
     fi
 }
+
 
 send_phpmyadmin_summary(){
     clear
     if [ -d "/var/www/phpymyadmin" ] 
     then
         echo ""
-        warning "[!] WARNING: There seems to already be a installation of PHPMyAdmin installed! This script will fail!"
+        warning "[!] AVISO: Parece que já existe uma instalação do PHPMyAdmin! Este script falhará!"
         echo ""
-        echo "[!] Summary:"
-        echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
-        echo "    Preselected webserver: NGINX"
+        echo "[!] Resumo:"
+        echo "    URL do PHPMyAdmin: $PHPMYADMIN_FQDN"
+        echo "    Servidor Web pré-selecionado: NGINX"
         echo "    SSL: $PHPMYADMIN_SSLSTATUS"
-        echo "    User: $PHPMYADMIN_USER_LOCAL"
+        echo "    Usuário: $PHPMYADMIN_USER_LOCAL"
         echo "    Email: $PHPMYADMIN_EMAIL"
         echo ""
     else
         echo ""
-        echo "[!] Summary:"
-        echo "    PHPMyAdmin URL: $PHPMYADMIN_FQDN"
-        echo "    Preselected webserver: NGINX"
+        echo "[!] Resumo:"
+        echo "    URL do PHPMyAdmin: $PHPMYADMIN_FQDN"
+        echo "    Servidor Web pré-selecionado: NGINX"
         echo "    SSL: $PHPMYADMIN_SSLSTATUS"
-        echo "    User: $PHPMYADMIN_USER_LOCAL"
+        echo "    Usuário: $PHPMYADMIN_USER_LOCAL"
         echo "    Email: $PHPMYADMIN_EMAIL"
         echo ""
     fi
 }
 
+
 phpmyadmin_ssl(){
     send_phpmyadmin_summary
-    echo "[!] Do you want to use SSL for PHPMyAdmin? This is recommended. (Y/N)"
+    echo "[!] Você deseja usar SSL para o PHPMyAdmin? Isso é recomendado. (S/N)"
     read -r SSL_CONFIRM
 
-    if [[ "$SSL_CONFIRM" =~ [Yy] ]]; then
+    if [[ "$SSL_CONFIRM" =~ [Ss] ]]; then
         PHPMYADMIN_SSLSTATUS=true
         phpmyadmin_email
     fi
@@ -701,9 +715,10 @@ phpmyadmin_ssl(){
     fi
 }
 
+
 phpmyadmin_user(){
     send_phpmyadmin_summary
-    echo "[!] Please enter username for admin account."
+    echo "[!] Por favor, insira o nome de usuário para a conta de administrador."
     read -r PHPMYADMIN_USER_LOCAL
     phpmyadmin_summary
 }
@@ -711,53 +726,55 @@ phpmyadmin_user(){
 phpmyadmin_email(){
     send_phpmyadmin_summary
     if  [ "$PHPMYADMIN_SSLSTATUS" =  "true" ]; then
-        echo "[!] Please enter your email. It will be shared with Lets Encrypt."
+        echo "[!] Por favor, insira seu e-mail. Ele será compartilhado com o Lets Encrypt."
         read -r PHPMYADMIN_EMAIL
         phpmyadmin_user
-        fi
+    fi
     if  [ "$PHPMYADMIN_SSLSTATUS" =  "false" ]; then
         phpmyadmin_user
-        PHPMYADMIN_EMAIL="Unavailable"
-        fi
+        PHPMYADMIN_EMAIL="Indisponível"
+    fi
 }
+
 
 ### Removal of Wings ###
 
 wings_remove(){
     echo ""
-    echo "[!] Are you sure you want to remove Wings? If you have any servers on this machine, they will also get removed. (Y/N)"
+    echo "[!] Tem certeza de que deseja remover o Wings? Se houver algum servidor nesta máquina, eles também serão removidos. (S/N)"
     read -r UNINSTALLWINGS
 
-    if [[ "$UNINSTALLWINGS" =~ [Yy] ]]; then
-        sudo systemctl stop wings # Stops wings
-        sudo rm -rf /var/lib/pterodactyl # Removes game servers and backup files
-        sudo rm -rf /etc/pterodactyl  || exit || warning "Pterodactyl Wings not installed!"
-        sudo rm /usr/local/bin/wings || exit || warning "Wings is not installed!" # Removes wings
-        sudo rm /etc/systemd/system/wings.service # Removes wings service file
+    if [[ "$UNINSTALLWINGS" =~ [Ss] ]]; then
+        sudo systemctl stop wings # Para o wings
+        sudo rm -rf /var/lib/pterodactyl # Remove servidores de jogo e arquivos de backup
+        sudo rm -rf /etc/pterodactyl  || exit || warning "Pterodactyl Wings não instalado!"
+        sudo rm /usr/local/bin/wings || exit || warning "Wings não está instalado!" # Remove wings
+        sudo rm /etc/systemd/system/wings.service # Remove o arquivo de serviço wings
         echo ""
-        echo "[!] Pterodactyl Wings has been uninstalled."
+        echo "[!] Pterodactyl Wings foi desinstalado."
         echo ""
     fi
 }
+
 
 ### Removal of Panel ###
 
 uninstallpanel(){
     echo ""
-    echo "[!] Do you really want to delete Pterodactyl Panel? All files & configurations will be deleted. (Y/N)"
+    echo "[!] Você realmente deseja excluir o Painel Pterodactyl? Todos os arquivos e configurações serão excluídos. (S/N)"
     read -r UNINSTALLPANEL
 
-    if [[ "$UNINSTALLPANEL" =~ [Yy] ]]; then
+    if [[ "$UNINSTALLPANEL" =~ [Ss] ]]; then
         uninstallpanel_backup
     fi
 }
 
 uninstallpanel_backup(){
     echo ""
-    echo "[!] Do you want to keep your database and backup your .env file? (Y/N)"
+    echo "[!] Deseja manter seu banco de dados e fazer backup do seu arquivo .env? (S/N)"
     read -r UNINSTALLPANEL_CHANGE
 
-    if [[ "$UNINSTALLPANEL_CHANGE" =~ [Yy] ]]; then
+    if [[ "$UNINSTALLPANEL_CHANGE" =~ [Ss] ]]; then
         BACKUPPANEL=true
         uninstallpanel_confirm
     fi
@@ -767,81 +784,84 @@ uninstallpanel_backup(){
     fi
 }
 
+
 uninstallpanel_confirm(){
     if  [ "$BACKUPPANEL" =  "true" ]; then
         mv /var/www/pterodactyl/.env .
-        sudo rm -rf /var/www/pterodactyl || exit || warning "Panel is not installed!" # Removes panel files
-        sudo rm /etc/systemd/system/pteroq.service # Removes pteroq service worker
-        sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf # Removes nginx config (if using nginx)
-        sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf # Removes Apache config (if using apache)
-        sudo rm -rf /var/www/pterodactyl # Removing panel files
+        sudo rm -rf /var/www/pterodactyl || exit || warning "O Painel não está instalado!" # Remove arquivos do painel
+        sudo rm /etc/systemd/system/pteroq.service # Remove o serviço pteroq
+        sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf # Remove a configuração do nginx (se estiver usando o nginx)
+        sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf # Remove a configuração do Apache (se estiver usando o Apache)
+        sudo rm -rf /var/www/pterodactyl # Removendo arquivos do painel
         systemctl restart nginx
         clear
         echo ""
-        echo "[!] Pterodactyl Panel has been uninstalled."
-        echo "    Your Panel database has not been deleted"
-        echo "    and your .env file is in your current directory."
+        echo "[!] O Painel Pterodactyl foi desinstalado."
+        echo "    Seu banco de dados do Painel não foi excluído"
+        echo "    e seu arquivo .env está no seu diretório atual."
         echo ""
-        fi
+    fi
     if  [ "$BACKUPPANEL" =  "false" ]; then
-        sudo rm -rf /var/www/pterodactyl || exit || warning "Panel is not installed!" # Removes panel files
-        sudo rm /etc/systemd/system/pteroq.service # Removes pteroq service worker
-        sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf # Removes nginx config (if using nginx)
-        sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf # Removes Apache config (if using apache)
-        sudo rm -rf /var/www/pterodactyl # Removing panel files
-        mariadb -u root -e "DROP DATABASE panel;" # Remove panel database
-        mysql -u root -e "DROP DATABASE panel;" # Remove panel database
+        sudo rm -rf /var/www/pterodactyl || exit || warning "O Painel não está instalado!" # Remove arquivos do painel
+        sudo rm /etc/systemd/system/pteroq.service # Remove o serviço pteroq
+        sudo unlink /etc/nginx/sites-enabled/pterodactyl.conf # Remove a configuração do nginx (se estiver usando o nginx)
+        sudo unlink /etc/apache2/sites-enabled/pterodactyl.conf # Remove a configuração do Apache (se estiver usando o Apache)
+        sudo rm -rf /var/www/pterodactyl # Removendo arquivos do painel
+        mariadb -u root -e "DROP DATABASE panel;" # Remove o banco de dados do painel
+        mysql -u root -e "DROP DATABASE panel;" # Remove o banco de dados do painel
         systemctl restart nginx
         clear
         echo ""
-        echo "[!] Pterodactyl Panel has been uninstalled."
-        echo "    Files, services, configs and your database has been deleted."
+        echo "[!] O Painel Pterodactyl foi desinstalado."
+        echo "    Arquivos, serviços, configurações e seu banco de dados foram excluídos."
         echo ""
-        fi
+    fi
 }
+
 
 ### Switching Domains ###
 
 switch(){
     if  [ "$SSLSWITCH" =  "true" ]; then
         echo ""
-        echo "[!] Change domains"
+        echo "[!] Alterar domínios"
         echo ""
-        echo "    The script is now changing your Pterodactyl Domain."
-        echo "      This may take a couple seconds for the SSL part, as SSL certificates are being generated."
+        echo "    O script está agora alterando seu domínio Pterodactyl."
+        echo "      Isso pode levar alguns segundos para a parte SSL, pois os certificados SSL estão sendo gerados."
         rm /etc/nginx/sites-enabled/pterodactyl.conf
-        curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx-ssl.conf || exit || warning "Pterodactyl Panel not installed!"
+        curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx-ssl.conf || exit || warning "Painel Pterodactyl não instalado!"
         sed -i -e "s@<domain>@${DOMAINSWITCH}@g" /etc/nginx/sites-enabled/pterodactyl.conf
         systemctl stop nginx
-        certbot certonly --standalone -d $DOMAINSWITCH --staple-ocsp --no-eff-email -m $EMAILSWITCHDOMAINS --agree-tos || exit || warning "Errors accured."
+        certbot certonly --standalone -d $DOMAINSWITCH --staple-ocsp --no-eff-email -m $EMAILSWITCHDOMAINS --agree-tos || exit || warning "Ocorreram erros."
         systemctl start nginx
         echo ""
-        echo "[!] Change domains"
+        echo "[!] Alterar domínios"
         echo ""
-        echo "    Your domain has been switched to $DOMAINSWITCH"
-        echo "    This script does not update your APP URL, you can"
-        echo "    update it in /var/www/pterodactyl/.env"
+        echo "    Seu domínio foi alterado para $DOMAINSWITCH"
+        echo "    Este script não atualiza sua URL do APP, você pode"
+        echo "    atualizá-lo em /var/www/pterodactyl/.env"
         echo ""
-        echo "    If using Cloudflare certifiates for your Panel, please read this:"
-        echo "    The script uses Lets Encrypt to complete the change of your domain,"
-        echo "    if you normally use Cloudflare Certificates,"
-        echo "    you can change it manually in its config which is in the same place as before."
+        echo "    Se estiver usando certificados Cloudflare para o seu Painel, por favor, leia isso:"
+        echo "    O script usa o Lets Encrypt para concluir a alteração do seu domínio,"
+        echo "    se você normalmente usa Certificados Cloudflare,"
+        echo "    você pode alterá-lo manualmente em sua configuração que está no mesmo local que antes."
         echo ""
-        fi
+    fi
     if  [ "$SSLSWITCH" =  "false" ]; then
-        echo "[!] Switching your domain.. This wont take long!"
-        rm /etc/nginx/sites-enabled/pterodactyl.conf || exit || echo "An error occurred. Could not delete file." || exit
-        curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx.conf || exit || warning "Pterodactyl Panel not installed!"
+        echo "[!] Alternando seu domínio.. Isso não levará muito tempo!"
+        rm /etc/nginx/sites-enabled/pterodactyl.conf || exit || echo "Ocorreu um erro. Não foi possível excluir o arquivo." || exit
+        curl -o /etc/nginx/sites-enabled/pterodactyl.conf https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/pterodactyl-nginx.conf || exit || warning "Painel Pterodactyl não instalado!"
         sed -i -e "s@<domain>@${DOMAINSWITCH}@g" /etc/nginx/sites-enabled/pterodactyl.conf
         systemctl restart nginx
         echo ""
-        echo "[!] Change domains"
+        echo "[!] Alterar domínios"
         echo ""
-        echo "    Your domain has been switched to $DOMAINSWITCH"
-        echo "    This script does not update your APP URL, you can"
-        echo "    update it in /var/www/pterodactyl/.env"
-        fi
+        echo "    Seu domínio foi alterado para $DOMAINSWITCH"
+        echo "    Este script não atualiza sua URL do APP, você pode"
+        echo "    atualizá-lo em /var/www/pterodactyl/.env"
+    fi
 }
+
 
 switchemail(){
     echo ""
