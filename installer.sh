@@ -981,7 +981,7 @@ ascii_art="
 
 # Exibir arte ASCII
 echo -e "$ascii_art"
-echo "Pterodactyl Installer v4.0"
+echo "Pterodactyl Installer Português v4.0"
 echo "Desenvolvido por Rest API Sistemas"
 echo ""
 echo "Este script não possui afiliação com o Painel Pterodactyl oficial."
