@@ -116,7 +116,7 @@ finish(){
     echo "" 
     echo "    Essas credenciais foram salvas em um arquivo chamado" 
     echo "    panel_credentials.txt no seu diretório atual"
-    cho "     para acesar digite o comando  nano panel_credentials.txt"
+    echo "     para acesar digite o comando  nano panel_credentials.txt"
     echo ""
     echo "    Gostaria de instalar também o Wings? (S/N)"
     read -r WINGS_ON_PANEL
