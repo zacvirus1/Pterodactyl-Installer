@@ -35,17 +35,16 @@ install_jexactyl_brasil() {
 
     show_message "Criando e entrando na pasta do novo diretório Jexactyl-Brasil..."
     sudo mkdir /var/www/pterodactyl
-    cd /var/www/pterodactyl || exit
+    cd /var/www/pterodactyl
 
     show_message "Copiando o .env do diretório de backup..."
-    sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/ || exit
+    sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/
 
     show_message "Baixando a versão mais recente do Jexactyl-Brasil usando CURL..."
     sudo curl -L -o panel.tar.gz https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar.gz
 
-    show_message "Extraindo os arquivos atualizados..."
-    sudo tar -xvf panel.tar.gz
-    sudo rm -f panel.tar.gz
+    show_message "Baixando os arquivos atualizados e excluindo o arquivo compactado..."
+    sudo tar -xzvf panel.tar.gz && rm -f panel.tar.gz
 
     show_message "Configurando permissões..."
     sudo chmod -R 755 storage/* bootstrap/cache
