@@ -31,29 +31,27 @@ install_jexactyl_brasil() {
     sudo mv /var/www/pterodactyl /var/www/pterodactyl-backup
 
     show_message "Despejando o banco de dados MySQL e salvando no diretório de backup..."
-    sudo mariadb-dump -u root -p panel > /var/www/pterodactyl-backup/panel.sql
+    sudo mysqldump -u root -p panel > /var/www/pterodactyl-backup/panel.sql
 
     show_message "Criando e entrando na pasta do novo diretório Jexactyl-Brasil..."
-    sudo mkdir -p /var/www/pterodactyl
-    cd /var/www/pterodactyl
+    sudo mkdir /var/www/pterodactyl
+    cd /var/www/pterodactyl || exit
 
     show_message "Copiando o .env do diretório de backup..."
-    sudo mkdir -p /var/www/pterodactyl-backup
-    sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/
+    sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/ || exit
 
     show_message "Baixando a versão mais recente do Jexactyl-Brasil usando CURL..."
     sudo curl -L -o panel.tar.gz https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar.gz
 
     show_message "Extraindo os arquivos atualizados..."
-    sudo tar -xzvf panel.tar.gz && rm -f panel.tar.gz
+    sudo tar -xvf panel.tar.gz
+    sudo rm -f panel.tar.gz
 
     show_message "Configurando permissões..."
-    sudo mkdir -p storage
-    sudo mkdir -p bootstrap/cache
     sudo chmod -R 755 storage/* bootstrap/cache
 
     show_message "Baixando as dependências do Composer..."
-    sudo -u <seu-usuario> composer install --no-dev --optimize-autoloader
+    sudo composer install --no-dev --optimize-autoloader
 
     show_message "Atualizando migrações do banco de dados..."
     sudo php artisan migrate --seed --force
@@ -71,7 +69,6 @@ install_jexactyl_brasil() {
     show_message "Se encontrar algum problema, informe-nos em nosso Discord: [seu link do Discord]"
     show_message "Instalação concluída!"
 }
-
 
 # Função para exibir o menu de opções.
 show_menu() {
