@@ -492,11 +492,12 @@ wings_full(){
         curl -o /etc/systemd/system/wings.service https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/wings.service
         chmod u+x /usr/local/bin/wings
         clear
-        echo ""
-        echo "[!] Pterodactyl Wings successfully installed."
-        echo "    You still need to setup the Node"
-        echo "    on the Panel and restart Wings after."
-        echo ""
+echo ""
+echo "[!] Pterodactyl Wings instalado com sucesso."
+echo "    Você ainda precisa configurar o Node"
+echo "    no Painel e reiniciar o Wings depois."
+echo ""
+
         fi
     if  [ "$WINGS_FQDN_STATUS" =  "false" ]; then
         curl -sSL https://get.docker.com/ | CHANNEL=stable bash
@@ -507,11 +508,12 @@ wings_full(){
         curl -o /etc/systemd/system/wings.service https://raw.githubusercontent.com/guldkage/Pterodactyl-Installer/main/configs/wings.service
         chmod u+x /usr/local/bin/wings
         clear
-        echo ""
-        echo "[!] Pterodactyl Wings successfully installed."
-        echo "    You still need to setup the Node"
-        echo "    on the Panel and restart Wings after."
-        echo ""
+echo ""
+echo "[!] Pterodactyl Wings instalado com sucesso."
+echo "    Você ainda precisa configurar o Node"
+echo "    no Painel e reiniciar o Wings depois."
+echo ""
+
         fi
 }
 
