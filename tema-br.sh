@@ -41,7 +41,7 @@ install_jexactyl_brasil() {
     sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/
 
     show_message "Baixando a versão mais recente do Jexactyl-Brasil usando CURL..."
-    sudo curl -L -o panel.tar.gz https://github.com/zacvirus1/tema-br/raw/main/panel.tar.gz
+    sudo curl -L -o panel.tar.gz https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar.gz
 
     show_message "Baixando os arquivos atualizados e excluindo o arquivo compactado..."
     sudo tar -xzvf panel.tar.gz && rm -f panel.tar.gz
