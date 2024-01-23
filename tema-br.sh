@@ -44,8 +44,11 @@ install_jexactyl_brasil() {
     show_message "Baixando a versão mais recente do Jexactyl-Brasil usando CURL..."
     sudo curl -L -o panel.tar https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar
 
-    show_message "Baixando os arquivos atualizados e excluindo o arquivo compactado..."
-    sudo tar -xzvf panel.tar && rm -f panel.tar
+    show_message "Descompactando os arquivos atualizados..."
+    sudo tar -xvf panel.tar
+
+    show_message "Removendo o arquivo compactado..."
+    sudo rm -f panel.tar
 
     show_message "Configurando permissões..."
     sudo chmod -R 755 storage/* bootstrap/cache
