@@ -31,6 +31,7 @@ install_jexactyl_brasil() {
     sudo mv /var/www/pterodactyl /var/www/pterodactyl-backup
 
     show_message "Despejando o banco de dados MySQL e salvando no diretório de backup..."
+    show_message "Insira a Senha do Banco de Dados"
     sudo mysqldump -u root -p panel > /var/www/pterodactyl-backup/panel.sql
 
     show_message "Criando e entrando na pasta do novo diretório Jexactyl-Brasil..."
@@ -41,10 +42,10 @@ install_jexactyl_brasil() {
     sudo cp /var/www/pterodactyl-backup/.env /var/www/pterodactyl/
 
     show_message "Baixando a versão mais recente do Jexactyl-Brasil usando CURL..."
-    sudo curl -L -o panel.tar.gz https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar.gz
+    sudo curl -L -o panel.tar https://github.com/zacvirus1/tema-br/releases/download/1.1.0/panel.tar
 
     show_message "Baixando os arquivos atualizados e excluindo o arquivo compactado..."
-    sudo tar -xzvf panel.tar.gz && rm -f panel.tar.gz
+    sudo tar -xzvf panel.tar && rm -f panel.tar
 
     show_message "Configurando permissões..."
     sudo chmod -R 755 storage/* bootstrap/cache
