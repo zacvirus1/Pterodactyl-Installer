@@ -931,7 +931,7 @@ tema_br() {
 
 ### Função para a opção 8
 install_control_panel() {
-    bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/ControlPanel-Installer/development/install.sh)
+    bash <(curl -s https://raw.githubusercontent.com/zacvirus1/controll.gg/main/install.sh
 }
 
 ### Options ###
