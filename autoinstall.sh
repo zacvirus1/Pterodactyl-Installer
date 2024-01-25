@@ -24,10 +24,10 @@ version="$(. /etc/os-release && echo "$VERSION_ID")"
 ### This script is meant to be used: ###
 ### ./install.sh <FQDN/URL to panel> <SSL true or false> <email> <username> <firstname> <lastname> <password> <wings true or false> ###
 
-finish(){
+finish() {
     clear
     echo ""
-    echo "[!] Panel installed."
+    echo "[!] Painel instalado."
     echo ""
 }
 
@@ -126,30 +126,29 @@ PASSWORD=`echo $7`
 WINGS=`echo $8`
 
 if [ -z "$FQDN" ] || [ -z "$SSL" ] || [ -z "$EMAIL" ] || [ -z "$USERNAME" ] || [ -z "$FIRSTNAME" ] || [ -z "$LASTNAME" ] || [ -z "$PASSWORD" ] || [ -z "$WINGS" ]; then
-    echo "Error! THe usage of this script is incorrect."
+    echo "Erro! A utilização deste script está incorreta."
     exit 1
 fi
 
-echo "Checking your OS.."
+echo "Verificando seu sistema operacional..."
 if { [ "$dist" = "ubuntu" ] && [ "$version" = "20.04" ]; } || { [ "$dist" = "debian" ] && [ "$version" = "11" ] || [ "$version" = "12" ]; }; then
-    echo "Welcome to Autoinstall of Pterodactyl Panel"
-    echo "Quick summary before the install begins:"
+    echo "Bem-vindo à instalação automática do Painel Pterodactyl"
+    echo "Breve resumo antes do início da instalação:"
     echo ""
     echo "FQDN (URL): $FQDN"
     echo "SSL: $SSL"
-    echo "Preselected webserver: NGINX"
-    echo "Email $EMAIL"
-    echo "Username $USERNAME"
-    echo "First name $FIRSTNAME"
-    echo "Last name $LASTNAME"
-    echo "Password: $PASSWORD"
-    echo "Wings install: $WINGS"
+    echo "Servidor web pré-selecionado: NGINX"
+    echo "E-mail: $EMAIL"
+    echo "Nome de usuário: $USERNAME"
+    echo "Primeiro nome: $FIRSTNAME"
+    echo "Sobrenome: $LASTNAME"
+    echo "Senha: $PASSWORD"
+    echo "Instalação do Wings: $WINGS"
     echo ""
-    echo "Starting automatic installation in 5 seconds"
+    echo "Iniciando a instalação automática em 5 segundos"
     sleep 5s
     panel_install
 else
-    echo "Your OS, $dist $version, is not supported"
+    echo "Seu sistema operacional, $dist $version, não é suportado."
     exit 1
 fi
-
