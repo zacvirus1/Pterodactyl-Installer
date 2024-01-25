@@ -929,9 +929,13 @@ tema_br() {
     bash <(curl -s https://raw.githubusercontent.com/zacvirus1/Pterodactyl-Installer/main/tema-br.sh)
 }
 
+### Função para a opção 8
+install_control_panel() {
+    bash <(curl -s https://raw.githubusercontent.com/Ferks-FK/ControlPanel-Installer/development/install.sh)
+}
 
 ### Options ###
-options(){
+options() {
     if [ "$dist" = "centos" ] && [ "$version" = "7" ]; then
         echo "Suas opções foram limitadas devido ao CentOS 7."
         echo ""
@@ -941,7 +945,8 @@ options(){
         echo "[3] Remover o Painel."
         echo "[4] Remover o Wings."
         echo "[5] Instalar Tema BR."
-        echo "Digite 1-5"
+        echo "[8] Instalar Control Panel."
+        echo "Digite 1-8"
         read -r option
         case $option in
             1 ) panel ;;
@@ -949,20 +954,22 @@ options(){
             3 ) uninstallpanel ;;
             4 ) wings_remove ;;
             5 ) tema_br ;;
+            8 ) install_control_panel ;;
             * ) echo ""
-                echo "Por favor, digite uma opção válida de 1 a 5."
+                echo "Por favor, digite uma opção válida de 1 a 8."
         esac
     else
-echo "O que você gostaria de fazer?"
-echo "[1] Instalar o Painel."
-echo "[2] Instalar o Wings."
-echo "[3] Instalar o PHPMyAdmin."
-echo "[4] Remover o Wings."
-echo "[5] Remover o Painel."
-echo "[6] Trocar o Domínio do Pterodactyl."
-echo "[7] Instalar Tema BR."
-echo "Digite 1-7"
-read -r option
+        echo "O que você gostaria de fazer?"
+        echo "[1] Instalar o Painel."
+        echo "[2] Instalar o Wings."
+        echo "[3] Instalar o PHPMyAdmin."
+        echo "[4] Remover o Wings."
+        echo "[5] Remover o Painel."
+        echo "[6] Trocar o Domínio do Pterodactyl."
+        echo "[7] Instalar Tema BR."
+        echo "[8] Instalar Control Panel."
+        echo "Digite 1-8"
+        read -r option
 
         case $option in
             1 ) option=1
@@ -986,11 +993,14 @@ read -r option
             7 ) option=7
                 tema_br
                 ;;
+            8 ) option=8
+                install_control_panel ;;
             * ) echo ""
-                echo "Please enter a valid option from 1-6"
+                echo "Por favor, digite uma opção válida de 1 a 8."
         esac
     fi
 }
+
 
 ### Start ###
 
